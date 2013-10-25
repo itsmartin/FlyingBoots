@@ -5,6 +5,7 @@ import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -51,6 +52,14 @@ public class FlyingBoots extends JavaPlugin {
 	
 	public void bootsUpdate(Player p) {
 		if (p.getGameMode()==GameMode.CREATIVE) return;
-		p.setAllowFlight(enabled && p.getInventory().getArmorContents()[0].getType() == Material.GOLD_BOOTS);
+		if (enabled && p.getInventory().getArmorContents()[0].getType() == Material.GOLD_BOOTS) {
+			if (!p.getAllowFlight()) {
+				p.setAllowFlight(true);
+				// If player is falling, stop them falling
+				if (!((Entity)p).isOnGround()) p.setFlying(true);
+			}
+		} else {
+			p.setAllowFlight(false);
+		}
 	}
 }
