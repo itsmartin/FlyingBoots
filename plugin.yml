@@ -1,0 +1,7 @@
+name: FlyingBoots
+main: com.martinbrook.FlyingBoots.FlyingBoots
+version: 0.1
+commands: 
+ flyingboots:
+  description: Toggles the boots on and off
+  usage: /flyingboots
